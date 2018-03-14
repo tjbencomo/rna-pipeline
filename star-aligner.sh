@@ -9,11 +9,6 @@
 #SBATCH --mail-user=tbencomo@stanford.edu
 #SBATCH --workdir=/home/users/tbencomo/rna-pipeline
 
-echo $USER
-echo "round 2"
-echo "$USER"
-echo $1
-echo "$1"
 
 
 
