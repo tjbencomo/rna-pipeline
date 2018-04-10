@@ -1,10 +1,3 @@
-#Wrapper file that sbatch submits star.sh file to the SLURM system
-#This file is responsible for parsing the command line parameters:
-#1)working directory
-#2)fastq files
-#3)genome directory for star
-#After parsing options, launches the star aligner
-
 '''
 Author: Tomas Bencomo
 Script to execute star alignment. Acts as a wrapper script for star.sh, which actually calls the star executable.
