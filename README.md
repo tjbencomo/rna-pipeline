@@ -1,29 +1,42 @@
 # rna-pipeline
-RNA-Seq analysis pipeline for the Lee Lab at Stanford University's School of Medicine. The pipeline consists of several individual bash scripts for each step in the pipeline that are wrapped in a python script. The python script glues the scripts together to allow for analysis of several files in a single command.
-## Scripts
-Note: Inputs must be in the precise order they are listed in the documentation. Named parameters will be supported in a future version.
+RNA-Seq analysis pipeline for the [Lee Lab](http://leelab.stanford.edu/) at Stanford University. The pipeline is designed to mimic dnanexus function on Stanford's Sherlock HPC cluster. The pipeline receives as input paired-end FASTQ files and performs alignment, and several analysis functions.
+
+## Pipeline Design
+The pipeline consists of 3 different steps:
+1. Alignment
+2. RNA Expression Quantification
+3. Gene Expression Analysis
+
+Alignment is first completed using the [STAR Aligner](https://github.com/alexdobin/STAR). Its settings mimic those found in ENCODE's [long-rna-seq-pipeline](https://github.com/ENCODE-DCC/long-rna-seq-pipeline/blob/f9ff54ddf1d955382a1f0aa50b55c8627702f6e1/dnanexus/align-star-pe/resources/usr/bin/lrna_align_star_pe.sh). RNA Expression Quantification and Gene Expression Analysis are performed in parallel. RNA Expression Quantification is computed using [RSEM](https://github.com/deweylab/RSEM) software package. Gene Expression Analysis is performed first by counting RNA reads with [HTSeq-count](http://htseq.readthedocs.io/en/master/count.html) and then analyzing counts with [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html). 
+
+## Individual Pipeline Components
 ### STAR Aligner
-`star-aligner.sh` Performs sequence alignment with the STAR aligner
+`star-aligner.py` Performs sequence alignment with the STAR aligner
+`star-aligner.py` acts as a wrapper for `star.sh` the bash script that executes the star aligner. `star-aligner.py` submits a slurm sbatch job to run the STAR aligner.
 
-It takes the following inputs:
-1. Working directory
-2. genomeDir directory
-3. Input FASTQ file 1
-4. Input FASTQ file 2
-5. Output file prefix
+#### Inputs
 
-It outputs the following files (All files will be prefixed with the Output file prefix parameter):
+`-wd`|`--workingDirectory` Working Directory: Where all output files will be located
+
+`-f1`|`--fastq1` FASTQ file 1: 1 of the two paired end fastq files to align
+
+`-f2`|`--fast21` FASTQ file 2: 1 of the two paired end fastq files to align
+
+`-gDir`|`--genomeDirectory` Genome Directory: Location of reference files for star aligner
+
+`-prefix`|`--outFilePrefix` Output File Prefix: file prefix that will be appended to start of output files. Optional. By default, the prefix is set to the filename of FASTQ1
+
+#### Outputs
+
+(Files are prefixed with specified or default prefix above)
+
 * `_Aligned.sortedByCoord.out.bam` Aligned BAM file sorted by coordinate. Used for programs such as HTSeq-count
 * `_Aligned.toTranscriptome.out.bam` Aligned BAM of translated coordinates. Used for programs such as RSEM
 * `_Log.out` Main file with information about run
 * `_Log.progress.out` Job progress statistics
 
 Example command:
-`sbatch star-aligner.sh /scratch/users/tbencomo/RNA_seq/pipeline-tests /scratch/users/tbencomo/RNA_seq/refs/out /scratch/users/tbencomo/RNA_seq/input_files/SG13_004_004_CGCTCATT-ATAGAGGC_R1.fastq /scratch/users/tbencomo/RNA_seq/input_files/SG13_004_004_CGCTCATT-ATAGAGGC_R2.fastq SG14`
+TODO
 
 This command enqueues the star-aligner script onto Sherlock with the following options:
-1. `/scratch/users/tbencomo/RNA_seq/pipeline-tests` Working directory
-2. `/scratch/users/tbencomo/RNA_seq/refs/out` genomeDir directory required by STAR
-3. `/scratch/users/tbencomo/RNA_seq/input_files/SG13_004_004_CGCTCATT-ATAGAGGC_R1.fastq` FASTQ file
-4. `/scratch/users/tbencomo/RNA_seq/input_files/SG13_004_004_CGCTCATT-ATAGAGGC_R2.fastq` FASTQ file
-5. `SG14` The output prefix. All output files will be prefixed with SG14_
+TODO
