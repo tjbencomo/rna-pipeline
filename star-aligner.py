@@ -5,6 +5,16 @@
 #3)genome directory for star
 #After parsing options, launches the star aligner
 
+'''
+Author: Tomas Bencomo
+Script to execute star alignment. Acts as a wrapper script for star.sh, which actually calls the star executable.
+Submits sbatch call, with command line option  SBATCH directives for --workdir, --output, and --error.
+This script performs the following tasks:
+Parse command line options
+submit sbatch job for the star.sh star aligner
+'''
+
+
 import argparse
 import subprocess
 import os
