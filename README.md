@@ -37,4 +37,4 @@ Alignment is first completed using the [STAR Aligner](https://github.com/alexdob
 * `_Log.progress.out` Job progress statistics
 
 Example command:
-python star-aligner.py -wd /scratch/users/tbencomo/RNA_seq/pipeline-tests -gDir /scratch/users/tbencomo/RNA_seq/refs/out -f1 /scratch/users/tbencomo/RNA_seq/input_files/SG13_004_004_CGCTCATT-ATAGAGGC_R1.fastq -f2 /scratch/users/tbencomo/RNA_seq/input_files/SG13_004_004_CGCTCATT-ATAGAGGC_R2.fastq
+`python star-aligner.py -wd /scratch/users/tbencomo/RNA_seq/pipeline-tests -gDir /scratch/users/tbencomo/RNA_seq/refs/out -f1 /scratch/users/tbencomo/RNA_seq/input_files/SG13_004_004_CGCTCATT-ATAGAGGC_R1.fastq -f2 /scratch/users/tbencomo/RNA_seq/input_files/SG13_004_004_CGCTCATT-ATAGAGGC_R2.fastq`
