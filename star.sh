@@ -1,12 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=star-internal
-#SBATCH --output=/home/users/tbencomo/out/star-internal.%j.out
-#SBATCH --error=/home/users/tbencomo/errout/star-internal.%j.err
 #SBATCH --nodes=1
 #SBATCH --mem=60000
 #SBATCH --time=0-03:00:00
 #SBATCH --mail-type=END
-#SBATCH --mail-user=tbencomo@stanford.edu
 
 
 POSITIONAL=()
@@ -60,7 +57,7 @@ echo WORK DIR	= "${WORK_DIR}"
 echo DEFAULT         = "${DEFAULT}"
 
 
-cd $WORK_DIR
+#cd $WORK_DIR
 
-STAR --genomeDir $GENOME_DIR --readFilesIn $FASTQ1 $FASTQ2 --runThreadN $SLURM_CPUS_ON_NODE --genomeLoad NoSharedMemory --outFilterMultimapNmax 20 --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --outFilterMismatchNmax 999 --outFilterMismatchNoverReadLmax 0.04 --alignIntronMin 20 --alignIntronMax 1000000 --alignMatesGapMax 1000000 --outSAMheaderCommentFile COfile.txt --outSAMheaderHD @HD VN:1.4 SO:coordinate --outSAMunmapped Within --outFilterType BySJout --outSAMattributes NH HI AS NM MD --outSAMtype BAM SortedByCoordinate --quantMode TranscriptomeSAM --sjdbScore 1 --limitBAMsortRAM 10000000000 --outFileNamePrefix $WORK_DIR/$PREFIX_
+STAR --genomeDir $GENOME_DIR --readFilesIn $FASTQ1 $FASTQ2 --runThreadN $SLURM_CPUS_ON_NODE --genomeLoad NoSharedMemory --outFilterMultimapNmax 20 --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --outFilterMismatchNmax 999 --outFilterMismatchNoverReadLmax 0.04 --alignIntronMin 20 --alignIntronMax 1000000 --alignMatesGapMax 1000000 --outSAMheaderCommentFile COfile.txt --outSAMheaderHD @HD VN:1.4 SO:coordinate --outSAMunmapped Within --outFilterType BySJout --outSAMattributes NH HI AS NM MD --outSAMtype BAM SortedByCoordinate --quantMode TranscriptomeSAM --sjdbScore 1 --limitBAMsortRAM 10000000000 --outFileNamePrefix $PREFIX    #$WORK_DIR/$PREFIX_
 
