@@ -11,7 +11,8 @@ Alignment is first completed using the [STAR Aligner](https://github.com/alexdob
 
 ## Individual Pipeline Components
 ### STAR Aligner
-`star-aligner.py` Performs sequence alignment with the STAR aligner
+`star-aligner.py` performs sequence alignment with the STAR aligner
+
 `star-aligner.py` acts as a wrapper for `star.sh` the bash script that executes the star aligner. `star-aligner.py` submits a slurm sbatch job to run the STAR aligner.
 
 #### Inputs
