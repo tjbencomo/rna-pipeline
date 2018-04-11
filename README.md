@@ -38,3 +38,25 @@ Alignment is first completed using the [STAR Aligner](https://github.com/alexdob
 
 Example command:
 `python star-aligner.py -wd /scratch/users/tbencomo/RNA_seq/pipeline-tests -gDir /scratch/users/tbencomo/RNA_seq/refs/out -f1 /scratch/users/tbencomo/RNA_seq/input_files/SG13_004_004_CGCTCATT-ATAGAGGC_R1.fastq -f2 /scratch/users/tbencomo/RNA_seq/input_files/SG13_004_004_CGCTCATT-ATAGAGGC_R2.fastq`
+
+### RSEM Expression Quantification
+`rsem-calculate.py` performs rna expression quantification with the RSEM software package. 
+
+`rsem-calculate.py` is a wrapper for rsem.sh, which actually calls the rsem-calculate-expression program. `rsem-calculate.py` submits a SLURM sbatch job of rsem.sh
+
+#### Inputs
+
+`-I`|`--input-bam-file` Input Bam: RNA-Seq aligned transcriptome bam file
+
+`-rDir`|`--rsem-ref-directory` RSEM Reference Directory: Prebuilt files RSEM needs to run
+
+`wd`|`--working-directory` Working Directory: Where all output files are located 
+
+#### Outputs
+
+(Files are prefixed with prefix computated from input bam file - contains filename until 'Aligned')
+
+* `.genes.results` Gene level expression estimates
+* `.isoforms.results` Isoform level expression estimates
+* `.stat` Folder containing model statistics
+* `.transcript.bam` Read alignments in transcript coordinates
