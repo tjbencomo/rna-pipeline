@@ -49,8 +49,12 @@ file_prefix = file_name[0:file_name.find('Aligned')]
 #print args.ref_directory
 #print file_prefix
 
+
+#Get environment username so the module can be user independent
 USER = os.environ['USER']
 
+
+#set SBATCH command line directives and submit sbatch rsem.sh script to SLURM queue
 workdir = "--workdir=" + args.working_directory
 output = "--output=/home/users/" + USER + "/out/rsem.%j.out"
 error = "--error=/home/users/" + USER + "/errout/rsem.%j.err"
