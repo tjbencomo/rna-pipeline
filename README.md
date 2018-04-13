@@ -63,3 +63,25 @@ Example command:
 
 Example command: 
 `python rsem-calculate.py -wd /scratch/users/tbencomo/RNA_seq/pipeline-tests/ -I /scratch/users/tbencomo/RNA_seq/pipeline-tests/SG13_004_004_CGCTCATT-ATAGAGGC_Aligned.toTranscriptome.out.bam  -rDir /scratch/users/tbencomo/RNA_seq/refs/out/rsem`
+
+### HTSeq Read Counts
+`htseq-launch.py` performs a count of all the read sequences from the aligned sorted by coordinate bam input file via the HTSeq software package. 
+
+`htseq-launch.py` is a wrapper for `htseq.sh,` which actually calls the htseq-count program. `htseq-launch.py` submits a SLURM sbatch job of htseq.sh
+
+#### Inputs
+
+`-I`|`--input-bam-file` Input Bam: RNA-Seq aligned sorted by coordinates bam file
+
+`wd`|`--working-directory` Working Directory: Where all output files are located 
+
+#### Outputs
+
+(Files are prefixed with prefix computated from input bam file - contains filename until 'Aligned')
+
+
+* `_counts.txt` Read counts for each gene
+
+Example command: 
+`python htseq-launch.py -I SG13_004_004_CGCTCATT-ATAGAGGC_Aligned.sortedByCoord.out.bam -wd /scratch/users/tbencomo/RNA_seq/pipeline-tests/`
+
