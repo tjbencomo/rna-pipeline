@@ -4,10 +4,6 @@
 #SBATCH --mem=10000
 #SBATCH --time=0-12:00:00
 #SBATCH --mail-type=END
-#SBATCH --mail-user=tbencomo@stanford.edu
-#SBATCH --workdir=/scratch/users/tbencomo/RNA_seq/pipeline-tests
-#SBATCH --output=/home/users/tbencomo/out/rsem.%j.out
-#SBATCH --error=/home/users/tbencomo/errout/rsem.%j.err
 
 POSITIONAL=()
 while [[ $# -gt 0 ]]

@@ -1,0 +1,28 @@
+Metadata-Version: 2.0
+Name: HTSeq
+Version: 0.9.1
+Summary: A framework to process and analyze data from high-throughput sequencing (HTS) assays
+Home-page: https://github.com/simon-anders/htseq
+Author: Fabio Zanini
+Author-email: fabio.zanini@stanford.edu
+License: GPL3
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Requires-Dist: numpy
+Requires-Dist: pysam (>=0.9.0)
+Provides-Extra: htseq-qa
+Requires-Dist: matplotlib (>=1.4); extra == 'htseq-qa'
+
+A framework to process and analyze data from high-throughput sequencing
+(HTS) assays.
+
+Development: https://github.com/simon-anders/htseq
+
+Documentation: http://htseq.readthedocs.io
+
