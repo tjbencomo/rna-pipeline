@@ -42,7 +42,7 @@ file_name = args.input_bam
 while '/' in file_name:
 	file_name = file_name[file_name.find('/')+1:]
 
-file_prefix = file_name[0:file_name.find('Aligned')]
+file_prefix = file_name[0:file_name.find('_Aligned')]
 
 #print args.working_directory
 #print args.input_bam
@@ -58,9 +58,9 @@ USER = os.environ['USER']
 workdir = "--workdir=" + args.working_directory
 output = "--output=/home/users/" + USER + "/out/rsem.%j.out"
 error = "--error=/home/users/" + USER + "/errout/rsem.%j.err"
-mail = "--mail-user" + USER + "@stanford.edu" #assumes user's email is structured sherlock_username@stanford.edu
+mail = "--mail-user=" + USER + "@stanford.edu" #assumes user's email is structured sherlock_username@stanford.edu
 
-subprocess.call(['sbatch', workdir, output, error, mail, 'star.sh', '-b', args.input_bam, '-prefix', file_prefix, '-rDir', args.ref_directory])
+subprocess.call(['sbatch', workdir, output, error, mail, 'rsem.sh', '-b', args.input_bam, '-prefix', file_prefix, '-rDir', args.ref_directory])
 
 
 
