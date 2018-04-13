@@ -54,8 +54,8 @@ print "pipeline dir : " + PIPE_DIR
 
 #set SBATCH command line directives and submit sbatch htseq.sh script to SLURM queue
 workdir = "--workdir=" + args.working_directory
-output = "--output=/home/users/" + USER + "/out/rsem.%j.out"
-error = "--error=/home/users/" + USER + "/errout/rsem.%j.err"
+output = "--output=/home/users/" + USER + "/out/htseq.%j.out"
+error = "--error=/home/users/" + USER + "/errout/htseq.%j.err"
 mail = "--mail-user=" + USER + "@stanford.edu" #assumes user's email is structured sherlock_username@stanford.edu
 
 subprocess.call(['sbatch', workdir, output, error, mail, 'htseq.sh', '-b', args.input_bam, '-prefix', file_prefix, '-pipeDir', PIPE_DIR])
