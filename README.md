@@ -60,3 +60,6 @@ Example command:
 * `.isoforms.results` Isoform level expression estimates
 * `.stat` Folder containing model statistics
 * `.transcript.bam` Read alignments in transcript coordinates
+
+Example command: 
+`python rsem-calculate.py -wd /scratch/users/tbencomo/RNA_seq/pipeline-tests/ -I /scratch/users/tbencomo/RNA_seq/pipeline-tests/SG13_004_004_CGCTCATT-ATAGAGGC_Aligned.toTranscriptome.out.bam  -rDir /scratch/users/tbencomo/RNA_seq/refs/out/rsem`
