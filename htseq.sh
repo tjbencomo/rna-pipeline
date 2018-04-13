@@ -4,9 +4,6 @@
 #SBATCH --mem=1000
 #SBATCH --time=00:40:00
 #SBATCH --mail-type=END
-#SBATCH --output=/home/users/tbencomo/out/htseq.%j.out
-#SBATCH --error=/home/users/tbencomo/errout/htseq.%j.err
-#SBATCH --workdir=/scratch/users/tbencomo/RNA_seq/pipeline-tests
 
 
 
