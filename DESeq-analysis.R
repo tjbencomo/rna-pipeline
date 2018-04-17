@@ -1,5 +1,18 @@
 #!/usr/bin/env Rscript
 
+
+# Author: Tomas Bencomo
+# R script to analyze gene expression data produced by HTSeq-count.
+# Final step of the rna-pipeline
+# Meant to be run after all HTSeq-count jobs have finished for a given collection of samples
+# Script performs the following:
+# 1) Checks if DESeq2 installed - if not, installs it
+# 2) Parse command line to get the directory of the counts data, the list of sample conditions, and the directory to write output
+# 3) Analyze RNA expression and write 3 output files:
+# 	-Unfiltered output list with all data
+#	-Filtered down-regulated file, filtered by pvalue <= .05
+#	-Filtered up-regulated file, filted by pvalue <= .05
+
 if(!require(DESeq2)) {
 	print("DESeq2 not installed, installing now")
 	source("https://bioconductor.org/biocLite.R")
