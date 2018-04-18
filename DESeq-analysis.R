@@ -12,6 +12,11 @@
 # 	-Unfiltered output list with all data
 #	-Filtered down-regulated file, filtered by pvalue <= .05
 #	-Filtered up-regulated file, filted by pvalue <= .05
+#
+#
+# Additionally, this script parses the names of the files in the counts directory to determine if the file is a Tumor or Normal sample. 
+# As of now, it distinguishes by the following pattern: 'NS' or 'ctrl' is Normal and 'SC' or 'scc' is Tumor. 
+
 
 if(!require(DESeq2)) {
 	print("DESeq2 not installed, installing now")
@@ -49,7 +54,14 @@ if(!require(dplyr)) {
 } else {
 	print("dplyr installed, continuing")
 }
-
+if(!require(stringr)) {
+        print("stringr not installed, installing now")
+        #idk if this is needed - no idea if this will work - needed to answer prompts when running source()
+        packages.install("stringr")
+        library(stringr)
+} else {
+        print("stringr installed, continuing")
+}
 
 
 
@@ -67,9 +79,24 @@ directory <- countsDir
 sampleFiles <- grep("*counts*", list.files(directory), value=TRUE)
 print(sampleFiles)
 
+sampleTypes <- c()
+for(file in sampleFiles) {
+	if(str_detect(file, 'NS') | str_detect(file, 'ctrl')) {
+		sampleTypes <- c(sampleTypes, "Normal")
+	} else {
+		sampleTypes <- c(sampleTypes, "Tumor")
+	}
+}
 
-sampleTypesIndex <- match("--sampleTypes", args) + 1
-sampleCondition <- args[sampleTypesIndex : (sampleTypesIndex + length(sampleFiles) - 1)]
+print(sampleTypes)
+
+
+
+
+#sampleTypesIndex <- match("--sampleTypes", args) + 1
+#sampleCondition <- args[sampleTypesIndex : (sampleTypesIndex + length(sampleFiles) - 1)]
+
+sampleCondition <- sampleTypes
 
 resultsDir = args[match("--resultsDir", args) + 1]
 setwd(resultsDir)
