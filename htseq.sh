@@ -2,7 +2,7 @@
 #SBATCH --job-name=htseq-internal
 #SBATCH --nodes=1
 #SBATCH --mem=1000
-#SBATCH --time=03:00:00
+#SBATCH --time=04:00:00
 #SBATCH --mail-type=END
 
 

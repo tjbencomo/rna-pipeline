@@ -36,12 +36,25 @@ args.fastq2 = ''.join(args.fastq2)
 args.genome_directory = ''.join(args.genome_directory)
 
 if args.prefix == None:
-	prefix_string = ''.join(args.fastq1)
-	while '/' in prefix_string:
-		prefix_string = prefix_string[prefix_string.find('/')+1:]
+	prefix_string1 = ''.join(args.fastq1)
+	prefix_string2 = ''.join(args.fastq2)
+	while '/' in prefix_string1 or '/' in prefix_string2:
+		prefix_string1 = prefix_string1[prefix_string1.find('/')+1:]
+		prefix_string2 = prefix_string2[prefix_string2.find('/')+1:]
 		#print(prefix_string);
 	#print prefix_string
-	args.prefix = prefix_string[0:prefix_string.find('R1')]
+
+#	args.prefix = prefix_string[0:prefix_string.find('R1')]
+	args.prefix = ""
+	if len(prefix_string1) != len(prefix_string2):
+		print 'ERROR ERROR PROBLEM WITH PREFIX NAMING. FASTQ FILES DIFF LENGTHS'
+	else:
+		for i in xrange(len(prefix_string1)):
+			if prefix_string1[i] != prefix_string2[i]:
+				break
+			else:
+				args.prefix += prefix_string1[i]
+	print args.prefix
 else:
 	args.prefix = ''.join(args.prefix)
 
