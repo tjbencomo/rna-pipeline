@@ -3,7 +3,7 @@ RNA-Seq analysis pipeline for the [Lee Lab](http://leelab.stanford.edu/) at Stan
 
 ## Pipeline Design
 The pipeline consists of 3 different steps:
-1. [Alignment](https://github.com/tjbencomo/rna-pipeline/blob/master/README.md##STAR-Aligner)
+1. [Alignment](https://github.com/tjbencomo/rna-pipeline/blob/master/README.md#star-aligner)
 2. RNA Expression Quantification
 3. Differential Expression Analysis
 
