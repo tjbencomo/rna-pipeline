@@ -21,7 +21,7 @@ Alignment is first completed using the [STAR Aligner](https://github.com/alexdob
 
 `-f1`|`--fastq1` FASTQ file 1: 1 of the two paired end fastq files to align
 
-`-f2`|`--fast21` FASTQ file 2: 1 of the two paired end fastq files to align
+`-f2`|`--fastq2` FASTQ file 2: 1 of the two paired end fastq files to align
 
 `-gDir`|`--genomeDirectory` Genome Directory: Location of reference files for star aligner
 
