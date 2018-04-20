@@ -85,3 +85,22 @@ Example command:
 Example command: 
 `python htseq-launch.py -I SG13_004_004_CGCTCATT-ATAGAGGC_Aligned.sortedByCoord.out.bam -wd /scratch/users/tbencomo/RNA_seq/pipeline-tests/`
 
+### DESeq2 Differential Expression Analysis
+`DESeq-launch.py` performs differential expression analysis on several samples, reporting which genes are upregulated and downregualted. 
+
+`DESeq-launch.py` is a wrapper for desq.sh. deseq.sh is a shell script to submit a SLURM sbatch job. The actual analysis is performed by an R script `DESeq-analysis.R`
+
+NOTE: As of now, the R script determines if a sample is tumor or normal based on its filename. If the file contains 'NS' or 'ctrl', it is classified as normal. Otherwise, it is classified as a tumor. In the future, the user will be able to enter strings for the program to classify each condition.
+#### Inputs
+
+`-counts`|`--counts-Directory` Directory containing HTSeq-count counts files
+`results`|`--results-Directory` Directory to store results files
+
+#### Outputs
+
+`unfiltered_normal_tumor_results.csv` CSV file containing all genes. Not filtered for pvalues or log2FoldChange levels
+`upregulated_genes.csv` CSV file containing all genes with log2FoldChange scores > 0 and with adjusted p-values <= .05
+`downregulated_genes.csv` CSV file containing all genes with log2FoldChange scores < 0 and with adjusted p-values <= .05
+
+Example command:
+`python DESeq-launch.py -counts /scratch/PI/carilee/NatComm-Analysis/counts/ -results /scratch/PI/carilee/NatComm-Analysis/results/`
