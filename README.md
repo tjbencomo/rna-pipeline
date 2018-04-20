@@ -4,8 +4,8 @@ RNA-Seq analysis pipeline for the [Lee Lab](http://leelab.stanford.edu/) at Stan
 ## Pipeline Design
 The pipeline consists of 3 different steps:
 1. [Alignment](https://github.com/tjbencomo/rna-pipeline/blob/master/README.md#star-aligner)
-2. RNA Expression Quantification
-3. Differential Expression Analysis
+2. [RNA Expression Quantification](https://github.com/tjbencomo/rna-pipeline/blob/master/README.md#rsem-expression-quantification)
+3. [Differential Expression Analysis](https://github.com/tjbencomo/rna-pipeline/blob/master/README.md#deseq2-differential-expression-analysis)
 
 Alignment is first completed using the [STAR Aligner](https://github.com/alexdobin/STAR). Its settings mimic those found in ENCODE's [long-rna-seq-pipeline](https://github.com/ENCODE-DCC/long-rna-seq-pipeline/blob/f9ff54ddf1d955382a1f0aa50b55c8627702f6e1/dnanexus/align-star-pe/resources/usr/bin/lrna_align_star_pe.sh). RNA Expression Quantification and Gene Expression Analysis are performed in parallel. RNA Expression Quantification is computed using [RSEM](https://github.com/deweylab/RSEM) software package. Gene Expression Analysis is performed first by counting RNA reads with [HTSeq-count](http://htseq.readthedocs.io/en/master/count.html) and then analyzing counts with [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html). 
 
