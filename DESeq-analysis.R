@@ -81,7 +81,7 @@ print(sampleFiles)
 
 sampleTypes <- c()
 for(file in sampleFiles) {
-	if(str_detect(file, 'NS') | str_detect(file, 'ctrl')) {
+	if(str_detect(file, 'NS') | str_detect(file, 'ctrl') | str_detect(file, 'CTR')) {
 		sampleTypes <- c(sampleTypes, "Normal")
 	} else {
 		sampleTypes <- c(sampleTypes, "Tumor")
@@ -123,7 +123,7 @@ gene_id_no_isoforms <- sapply(gene_ids, substr, 0, which(strsplit(gene_ids, "")[
 
 res$ENSEMBL_CODE <- gene_id_no_isoforms
 res$symbol <- mapIds(org.Hs.eg.db, keys=res$ENSEMBL_CODE, column="SYMBOL", keytype = "ENSEMBL", multiVals = "first")
-
+res$gene_id <- rownames(res)
 
 sum(res$pvalue < .05, na.rm = TRUE)
 sum(res$padj < .05, na.rm = TRUE)
@@ -138,7 +138,7 @@ min(res$padj, na.rm = TRUE)
 #First, write to csv file an unfiltered output list
 resOrdered <- res[order(res$pvalue), ]
 resOrdered <- data.frame(resOrdered)
-resOrdered <- resOrdered[, c(8, 7, 1, 2, 3, 4, 5, 6)]
+resOrdered <- resOrdered[, c(8, 7, 9, 1, 2, 3, 4, 5, 6)]
 write.csv(as.data.frame(resOrdered), file='unfiltered_normal_tumor_results.csv', row.names = FALSE)
 
 #Now write upregulated file with padj <= .05

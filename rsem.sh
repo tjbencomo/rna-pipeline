@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=rsem-internal
 #SBATCH --nodes=1
-#SBATCH --mem=30000
-#SBATCH --time=0-12:00:00
+#SBATCH --mem=55000
+#SBATCH --time=0-24:00:00
 #SBATCH --mail-type=END
 
 POSITIONAL=()
@@ -43,5 +43,5 @@ echo PREFIX	= "${PREFIX}"
 echo REF_DIR	= "${REF_DIR}"
 echo DEFAULT         = "${DEFAULT}"
 
-rsem-calculate-expression --alignments --paired-end --ci-memory 8000 --num-threads $SLURM_CPUS_ON_NODE $BAM $REF_DIR $PREFIX
+rsem-calculate-expression --alignments --paired-end --ci-memory 10000 --num-threads $SLURM_CPUS_ON_NODE $BAM $REF_DIR $PREFIX
 
