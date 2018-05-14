@@ -26,6 +26,11 @@ case $key in
     shift # past argument
     shift # past value
     ;;
+    -pipeDir|--pipeline-directory)
+    PIPE_DIR="$2"
+    shift # past argument
+    shift # past value
+    ;;
     --default)
     DEFAULT=YES
     shift # past argument
@@ -42,6 +47,7 @@ echo BAM        = "${BAM}"
 echo PREFIX	= "${PREFIX}"
 echo REF_DIR	= "${REF_DIR}"
 echo DEFAULT         = "${DEFAULT}"
+echo PIPE DIR = "{$PIPE_DIR}"
 
-rsem-calculate-expression --alignments --paired-end --ci-memory 10000 --num-threads $SLURM_CPUS_ON_NODE $BAM $REF_DIR $PREFIX
+$PIPE_DIR/RSEM/rsem-calculate-expression --alignments --paired-end --ci-memory 10000 --num-threads $SLURM_CPUS_ON_NODE $BAM $REF_DIR $PREFIX
 

@@ -52,6 +52,7 @@ file_prefix = file_name[0:file_name.find('_Aligned')]
 
 #Get environment username so the module can be user independent
 USER = os.environ['USER']
+PIPE_DIR = os.getcwd() # Get path to rna-pipeline directory so we can run the binary
 
 
 #set SBATCH command line directives and submit sbatch rsem.sh script to SLURM queue
@@ -60,7 +61,7 @@ output = "--output=/home/users/" + USER + "/out/rsem.%j.out"
 error = "--error=/home/users/" + USER + "/errout/rsem.%j.err"
 mail = "--mail-user=" + USER + "@stanford.edu" #assumes user's email is structured sherlock_username@stanford.edu
 
-subprocess.call(['sbatch', workdir, output, error, mail, 'rsem.sh', '-b', args.input_bam, '-prefix', file_prefix, '-rDir', args.ref_directory])
+subprocess.call(['sbatch', workdir, output, error, mail, 'rsem.sh', '-b', args.input_bam, '-prefix', file_prefix, '-rDir', args.ref_directory, '-pipeDir', PIPE_DIR])
 
 
 
