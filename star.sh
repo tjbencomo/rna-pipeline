@@ -2,7 +2,7 @@
 #SBATCH --job-name=star-internal
 #SBATCH --nodes=1
 #SBATCH --mem=80000
-#SBATCH --time=0-08:00:00
+#SBATCH --time=0-07:00:00
 #SBATCH --mail-type=END
 
 
@@ -37,6 +37,11 @@ case $key in
     shift # past argument
     shift # past argument
     ;;
+    -pipeDir|--pipeline-directory)
+    PIPE_DIR="$2"
+    shift #past argument
+    shift #past argument
+    ;;
     --default)
     DEFAULT=YES
     shift # past argument
@@ -54,6 +59,7 @@ echo FASTQ2     = "${FASTQ2}"
 echo GENOME DIR    = "${GENOME_DIR}"
 echo PREFIX	= "${PREFIX}"
 echo WORK DIR	= "${WORK_DIR}"
+echo PIPE DIR = "${PIPE_DIR}"
 echo DEFAULT         = "${DEFAULT}"
 
 
@@ -61,5 +67,5 @@ echo DEFAULT         = "${DEFAULT}"
 
 echo $SLURM_CPUS_ON_NODE
 
-STAR --genomeDir $GENOME_DIR --readFilesIn $FASTQ1 $FASTQ2 --readFilesCommand zcat --runThreadN $SLURM_CPUS_ON_NODE --genomeLoad NoSharedMemory --outFilterMultimapNmax 20 --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --outFilterMismatchNmax 999 --outFilterMismatchNoverReadLmax 0.04 --alignIntronMin 20 --alignIntronMax 1000000 --alignMatesGapMax 1000000 --outSAMheaderCommentFile COfile.txt --outSAMheaderHD @HD VN:1.4 SO:coordinate --outSAMunmapped Within --outFilterType BySJout --outSAMattributes NH HI AS NM MD --outSAMtype BAM SortedByCoordinate --quantMode TranscriptomeSAM --sjdbScore 1 --limitBAMsortRAM 20000000000 --outFileNamePrefix $PREFIX    #$WORK_DIR/$PREFIX_
+$PIPE_DIR/STAR/bin/Linux_x86_64/STAR --genomeDir $GENOME_DIR --readFilesIn $FASTQ1 $FASTQ2 --readFilesCommand zcat --runThreadN $SLURM_CPUS_ON_NODE --genomeLoad NoSharedMemory --outFilterMultimapNmax 20 --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --outFilterMismatchNmax 999 --outFilterMismatchNoverReadLmax 0.04 --alignIntronMin 20 --alignIntronMax 1000000 --alignMatesGapMax 1000000 --outSAMheaderCommentFile COfile.txt --outSAMheaderHD @HD VN:1.4 SO:coordinate --outSAMunmapped Within --outFilterType BySJout --outSAMattributes NH HI AS NM MD --outSAMtype BAM SortedByCoordinate --quantMode TranscriptomeSAM --sjdbScore 1 --limitBAMsortRAM 20000000000 --outFileNamePrefix $PREFIX    #$WORK_DIR/$PREFIX_
 

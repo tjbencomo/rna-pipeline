@@ -66,6 +66,7 @@ else:
 #All three options are dependent on the user - different users will have different filepaths - must make user indepenedent by modifying filepath according to user
 
 USER = os.environ['USER']
+PIPE_DIR = os.getcwd()
 
 workdir = "--workdir=" + args.working_directory
 output = "--output=/home/users/" + USER + "/out/star-aligner.%j.out"
@@ -74,6 +75,6 @@ mail = "--mail-user=" + USER + "@stanford.edu" #assumes user's email is structur
 
 #subprocess.call(['sbatch', 'star.sh', '-gDir', args.genome_directory, '-prefix', args.prefix, '-f1', args.fastq1, '-f2', args.fastq2, '-wd', '/scratch/users/tbencomo/RNA_seq/pipeline-tests'])
 
-subprocess.call(['sbatch', workdir, output, error, mail, 'star.sh', '-gDir', args.genome_directory, '-prefix', args.prefix, '-f1', args.fastq1, '-f2', args.fastq2])
+subprocess.call(['sbatch', workdir, output, error, mail, 'star.sh', '-gDir', args.genome_directory, '-prefix', args.prefix, '-f1', args.fastq1, '-f2', args.fastq2, '-pipeDir', PIPE_DIR])
 
 
