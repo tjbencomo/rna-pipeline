@@ -47,7 +47,7 @@ echo BAM        = "${BAM}"
 echo PREFIX	= "${PREFIX}"
 echo REF_DIR	= "${REF_DIR}"
 echo DEFAULT         = "${DEFAULT}"
-echo PIPE DIR = "{$PIPE_DIR}"
+echo PIPE DIR = "${PIPE_DIR}"
 
 $PIPE_DIR/RSEM/rsem-calculate-expression --alignments --paired-end --ci-memory 10000 --num-threads $SLURM_CPUS_ON_NODE $BAM $REF_DIR $PREFIX
 

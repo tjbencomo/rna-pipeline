@@ -23,6 +23,11 @@ case $key in
     shift # past argument
     shift # past value
     ;;
+    -pipeDir|--pipeline-directory)
+    PIPE_DIR="$2"
+    shift # past argument
+    shift # past value
+    ;;
     --default)
     DEFAULT=YES
     shift # past argument
@@ -39,8 +44,9 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 
 echo COUNTS        = "${COUNTS}"
 echo RESULTS     = "${RESULTS}"
+echo PIPE DIR = "${PIPE_DIR}"
 echo DEFAULT         = "${DEFAULT}"
 
-Rscript /home/users/tbencomo/rna-pipeline/DESeq-analysis.R --countsDir $COUNTS --resultsDir $RESULTS
+Rscript $PIPE_DIR/DESeq-analysis.R --countsDir $COUNTS --resultsDir $RESULTS
 
 

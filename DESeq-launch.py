@@ -29,6 +29,8 @@ args = parser.parse_args()
 
 #Get environment variable to be user independent
 USER = os.environ['USER']
+PIPE_DIR = os.getcwd()
+
 
 #Fix formating to convert to strings
 args.counts_directory = ''.join(args.counts_directory)
@@ -39,7 +41,7 @@ output = "--output=/home/users/" + USER + "/out/deseq.%j.out"
 error = "--error=/home/users/" + USER + "/errout/deseq.%j.err"
 mail = "--mail-user=" + USER + "@stanford.edu" #assumes user's email is structured sherlock_username@stanford.edu
 
-subprocess.call(['sbatch', workdir, output, error, mail, 'deseq.sh', '-counts', args.counts_directory, '-results', args.results_directory])
+subprocess.call(['sbatch', workdir, output, error, mail, 'deseq.sh', '-counts', args.counts_directory, '-results', args.results_directory, '-pipeDir', PIPE_DIR])
 
 
 
