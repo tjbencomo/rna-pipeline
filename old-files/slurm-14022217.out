@@ -1,0 +1,7 @@
+BAM = SG13_004_004_CGCTCATT-ATAGAGGC_Aligned.sortedByCoord.out.bam
+PREFIX = SG13_004_004_CGCTCATT-ATAGAGGC
+GFF_FILE = /home/users/tbencomo/rna-pipeline/refs/gencode.v27.annotation.gtf.gz
+PIPE_DIR = /home/users/tbencomo/rna-pipeline/
+DEFAULT = 
+  [Errno 2] No such file or directory: 'SG13_004_004_CGCTCATT-ATAGAGGC_Aligned.sortedByCoord.out.bam'
+  [Exception type: IOError, raised in count.py:58]
