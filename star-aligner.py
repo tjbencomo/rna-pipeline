@@ -34,7 +34,7 @@ args.working_directory = ''.join(args.working_directory)
 args.fastq1 = ''.join(args.fastq1)
 args.fastq2 = ''.join(args.fastq2)
 args.genome_directory = ''.join(args.genome_directory)
-
+'''
 if args.prefix == None:
 	prefix_string1 = ''.join(args.fastq1)
 	prefix_string2 = ''.join(args.fastq2)
@@ -57,7 +57,18 @@ if args.prefix == None:
 	print args.prefix
 else:
 	args.prefix = ''.join(args.prefix)
+'''
 
+
+if args.prefix == None:
+	file_name = args.fastq1[args.fastq1.rfind('/')+1 : ] 
+	file_extension_pos = file_name.find('.fastq.gz')
+	paired_end_indicator_pos = file_name.rfind('_', 0, file_extension_pos)
+	args.prefix = file_name[0:paired_end_indicator_pos]
+	print args.prefix
+	args.prefix += '_'
+else:
+	args.prefix = ''.join(args.prefix)
 
 #We now need to sbatch star.sh with some additional batch directives
 #--workdir

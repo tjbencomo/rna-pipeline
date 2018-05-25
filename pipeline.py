@@ -59,10 +59,14 @@ def parseArgs():
 	rsemDirectory = ''.join(args.rsemDirectory)
 
 	if args.outputDirectory == None:
-		outputDirectory = findParentDirectory(''.join(args.directory)) + extractDirectoryName(directory) + '-output'
+		outputDirectory = findParentDirectory(''.join(args.directory)) + extractDirectoryName(directory) + '-pipeline-output'
+		if not os.path.exists(outputDirectory):
+			#print("Auto generated output directory did not exist. Created output directory")
+			os.makedirs(outputDirectory)
+		else:
+			print("auto generated output directory already exists")
 	else:
-		outputDirectory = ''.join(args.outputDirectory)
-
+		outputDirectory = ''.join(args.outputDirectory) #directory must already exist
 
 	return (directory, genomeDirectory, rsemDirectory, outputDirectory) 
 
@@ -96,27 +100,31 @@ def getSamplePairs(directory):
 	return samples
 
 
-def launchPipeline(genome_directory, rsem_directory, output_directory, samples):
+def launchPipeline(base_directory, genome_directory, rsem_directory, output_directory, samples):
 	PIPE_DIR = os.getcwd()
+	
+	if base_directory[len(base_directory)-1] != '/':
+		base_directory += '/'
+	
 	for sample in samples:
 		paired_files = samples[sample]
 		output = subprocess.check_output(['python', PIPE_DIR + '/star-aligner.py', '-wd', output_directory, 
-						'-f1', paired_files[0], '-f2', paired_files[1], '-gDir', genome_directory])
+						'-f1', base_directory + paired_files[0], '-f2', base_directory + paired_files[1], '-gDir', genome_directory])
+		#print(output)
 		phrase = 'Submitted batch job'
 		index = output.find(phrase)
 		end = index + len(phrase)
 		jobID = output[end + 1:output.find('\n')]
-
+		star_file_prefix = output[output.find('\n')+1 : output.find('\n', output.find('\n')+1, len(output))]
+		star_output_file = star_file_prefix + '_Aligned.toTranscriptome.out.bam'
+		
 def main():
 	directory, genomeDirectory, rsemDirectory, outputDirectory = parseArgs()
 	samples = getSamplePairs(directory)
-	launchPipeline(genomeDirectory, rsemDirectory, outputDirectory, samples)
+	launchPipeline(directory, genomeDirectory, rsemDirectory, outputDirectory, samples)
 	print("All jobs launched")
 
 
 if __name__ == "__main__": main()
 
 
-# finish creating a directory-pipeline-output option if no output directory inputted
-# write launch steps
-# Turn all of these steps into functions
