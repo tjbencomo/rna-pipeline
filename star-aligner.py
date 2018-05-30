@@ -61,11 +61,13 @@ else:
 
 
 if args.prefix == None:
+	#print("No prefix given, computing prefix")
 	file_name = args.fastq1[args.fastq1.rfind('/')+1 : ] 
 	file_extension_pos = file_name.find('.fastq.gz')
 	paired_end_indicator_pos = file_name.rfind('_', 0, file_extension_pos)
 	args.prefix = file_name[0:paired_end_indicator_pos]
 	print args.prefix
+	#print("Prefix should have been printed above")
 	args.prefix += '_'
 else:
 	args.prefix = ''.join(args.prefix)

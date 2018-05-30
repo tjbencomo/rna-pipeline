@@ -108,15 +108,20 @@ def launchPipeline(base_directory, genome_directory, rsem_directory, output_dire
 	
 	for sample in samples:
 		paired_files = samples[sample]
+		
+		#submit STAR alignment job
 		output = subprocess.check_output(['python', PIPE_DIR + '/star-aligner.py', '-wd', output_directory, 
 						'-f1', base_directory + paired_files[0], '-f2', base_directory + paired_files[1], '-gDir', genome_directory])
-		#print(output)
+		
 		phrase = 'Submitted batch job'
 		index = output.find(phrase)
 		end = index + len(phrase)
 		jobID = output[end + 1:output.find('\n')]
 		star_file_prefix = output[output.find('\n')+1 : output.find('\n', output.find('\n')+1, len(output))]
-		star_output_file = star_file_prefix + '_Aligned.toTranscriptome.out.bam'
+		star_transcriptome_output_file = star_file_prefix + '_Aligned.toTranscriptome.out.bam'
+		
+		#submit RSEM quantification job
+		subprocess.check_output(['python', PIPE_DIR + '/rsem-calculate.py', '-wd', output_directory, '-I', output_directory + '/' + star_transcriptome_output_file, '-rDir', rsem_directory, '-jobID', jobID])
 		
 def main():
 	directory, genomeDirectory, rsemDirectory, outputDirectory = parseArgs()

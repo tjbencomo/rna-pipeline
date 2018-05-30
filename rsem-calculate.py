@@ -29,6 +29,8 @@ parser.add_argument('-rDir', '--rsem-ref-directory', metavar='-rsem-ref-director
 
 parser.add_argument('-wd', '--working-directory', metavar='--working-directory', type=str, nargs=1, help='location to store output files', dest='working_directory')
 
+parser.add_argument('-jobID', '--dependency-job', metavar='--dependency-job', type=str, nargs=1, help='job id to set sbatch dependency directive', dest='job_id')
+
 args = parser.parse_args()
 
 
@@ -36,6 +38,13 @@ args = parser.parse_args()
 args.working_directory = ''.join(args.working_directory)
 args.input_bam = ''.join(args.input_bam)
 args.ref_directory = ''.join(args.ref_directory)
+
+
+if args.job_id == None:
+	dependency = False
+else:
+	args.job_id =''.join(args.job_id)
+	dependency = True
 
 file_name = args.input_bam
 
@@ -61,7 +70,11 @@ output = "--output=/home/users/" + USER + "/out/rsem.%j.out"
 error = "--error=/home/users/" + USER + "/errout/rsem.%j.err"
 mail = "--mail-user=" + USER + "@stanford.edu" #assumes user's email is structured sherlock_username@stanford.edu
 
-subprocess.call(['sbatch', workdir, output, error, mail, 'rsem.sh', '-b', args.input_bam, '-prefix', file_prefix, '-rDir', args.ref_directory, '-pipeDir', PIPE_DIR])
+if dependency:
+	dependence = "--dependency=afterok:" + args.job_id
+	subprocess.call(['sbatch', workdir, output, error, mail, dependence, 'rsem.sh', '-b', args.input_bam, '-prefix', file_prefix, '-rDir', args.ref_directory, '-pipeDir', PIPE_DIR])
+else:
+	subprocess.call(['sbatch', workdir, output, error, mail, 'rsem.sh', '-b', args.input_bam, '-prefix', file_prefix, '-rDir', args.ref_directory, '-pipeDir', PIPE_DIR])
 
 
 
