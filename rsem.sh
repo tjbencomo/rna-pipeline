@@ -5,6 +5,8 @@
 #SBATCH --time=0-24:00:00
 #SBATCH --mail-type=END
 
+module load perl
+
 POSITIONAL=()
 while [[ $# -gt 0 ]]
 do
