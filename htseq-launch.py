@@ -26,6 +26,8 @@ parser.add_argument('-I', '--input-bam-file', metavar='--input-bam-file', type=s
 
 parser.add_argument('-wd', '--working-directory', metavar='--working-directory', type=str, nargs=1, help='location to store output files', dest='working_directory')
 
+parser.add_argument('-jobID', '--dependency-job', metavar='--dependency-job', type=str, nargs=1, help='job id to set sbatch dependency directive', dest='job_id')
+
 args = parser.parse_args()
 
 
@@ -34,6 +36,13 @@ args.working_directory = ''.join(args.working_directory)
 args.input_bam = ''.join(args.input_bam)
 
 file_name = args.input_bam
+
+if args.job_id == None:
+	dependency = False
+else:
+	args.job_id =''.join(args.job_id)
+	dependency = True
+
 
 while '/' in file_name:
 	file_name = file_name[file_name.find('/')+1:]
@@ -58,6 +67,11 @@ output = "--output=/home/users/" + USER + "/out/htseq.%j.out"
 error = "--error=/home/users/" + USER + "/errout/htseq.%j.err"
 mail = "--mail-user=" + USER + "@stanford.edu" #assumes user's email is structured sherlock_username@stanford.edu
 
-subprocess.call(['sbatch', workdir, output, error, mail, 'htseq.sh', '-b', args.input_bam, '-prefix', file_prefix, '-pipeDir', PIPE_DIR])
+
+if dependency:
+	dependence = "--dependency=afterok:" + args.job_id
+	subprocess.call(['sbatch', workdir, output, error,dependence,  mail, 'htseq.sh', '-b', args.input_bam, '-prefix', file_prefix, '-pipeDir', PIPE_DIR])
+else:
+	subprocess.call(['sbatch', workdir, output, error, mail, 'htseq.sh', '-b', args.input_bam, '-prefix', file_prefix, '-pipeDir', PIPE_DIR])
 
 

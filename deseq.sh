@@ -5,7 +5,7 @@
 #SBATCH --time=0-01:00:00
 #SBATCH --mail-type=END
 
-
+ml R
 
 POSITIONAL=()
 while [[ $# -gt 0 ]]

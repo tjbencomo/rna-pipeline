@@ -119,10 +119,16 @@ def launchPipeline(base_directory, genome_directory, rsem_directory, output_dire
 		jobID = output[end + 1:output.find('\n')]
 		star_file_prefix = output[output.find('\n')+1 : output.find('\n', output.find('\n')+1, len(output))]
 		star_transcriptome_output_file = star_file_prefix + '_Aligned.toTranscriptome.out.bam'
+		star_sortedByCoord_output_file = star_file_prefix + '_Aligned.sortedByCoord.out.bam'
 		
 		#submit RSEM quantification job
 		subprocess.check_output(['python', PIPE_DIR + '/rsem-calculate.py', '-wd', output_directory, '-I', output_directory + '/' + star_transcriptome_output_file, '-rDir', rsem_directory, '-jobID', jobID])
 		
+
+		#submit HTSeq-count job
+		subprocess.check_output(['python', PIPE_DIR + '/htseq-launch.py', '-wd', output_directory, '-I', output_directory + '/' + star_sortedByCoord_output_file, '-jobID', jobID])
+
+	
 def main():
 	directory, genomeDirectory, rsemDirectory, outputDirectory = parseArgs()
 	samples = getSamplePairs(directory)
