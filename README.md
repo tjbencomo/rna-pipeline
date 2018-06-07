@@ -110,7 +110,7 @@ NOTE: As of now, the R script determines if a sample is tumor or normal based on
 
 `-counts`|`--counts-Directory` Directory containing HTSeq-count counts files
 
-`results`|`--results-Directory` Directory to store results files
+`-results`|`--results-Directory` Directory to store results files
 
 #### Outputs
 
