@@ -1,4 +1,5 @@
 # RNA-Seq Pipeline Guide
+***WARNING***: rna-pipeline is only designed to work with the Sherlock Cluster. No support is provided for other HPC clusters at this time.
 This file contains Tomas's notes from building the pipeline as well as general install tips. 
 ## Dependencies
 Before using the pipeline, several programs must be properly configured.
