@@ -28,14 +28,14 @@ if(length(new.packages)) install.packages(new.packages)
 source("https://bioconductor.org/biocLite.R")
 list.of.pacakges <- c("DESeq2", "AnnotationDbi", "org.Hs.eg.db", "tximport")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) biocLite(new.packages)
+if(length(new.packages) > 0) biocLite(new.packages)
 
 require(DESeq2)
 require(AnnotationDbi)
 require(org.Hs.eg.db)
 require(dplyr)
 require(stringr)
-require("tximport")
+require(tximport)
 
 #Args we are expecting
 # --countsDir directory with htseq counts files
