@@ -1,5 +1,0 @@
-#!/home/users/tbencomo/rna-pipeline/python/bin/python2.7
-
-import HTSeq.scripts.qa
-
-HTSeq.scripts.qa.main()
