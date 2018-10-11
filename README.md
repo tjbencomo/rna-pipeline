@@ -1,4 +1,5 @@
 # rna-pipeline
+***WARNING***: CURRENTLY A WORK IN PROGRESS - DO NOT USE  
 RNA-Seq analysis pipeline for the [Lee Lab](http://leelab.stanford.edu/) at Stanford University. The pipeline is designed to mimic dnanexus function on Stanford's Sherlock HPC cluster. The pipeline receives as input paired-end FASTQ files and performs alignment as well as several analysis functions.
 
 ## Pipeline Design
