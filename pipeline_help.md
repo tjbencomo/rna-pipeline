@@ -10,10 +10,10 @@ ml python/3.6.1
 ml perl
 ml R
 ```
-This loads Python and Perl from the sherlock shared software, placing them in your $PATH variable. It is recommended you place these commands in `/.profile` so that they autoload when your session starts.
+This loads Python and Perl from the sherlock shared software, placing them in your $PATH variable. It is recommended you place these commands in `/.bashrc` so that they autoload when your session starts.
 ### Programs
 #### RSEM
-RSEM is already installed in the `$PI_HOME` directory. All shared software packages for the lab can be found in `$PI_HOME/software`. Add the following command to `/.profile` so that RSEM is accessible from startup:
+RSEM is already installed in the `$PI_HOME` directory. All shared software packages for the lab can be found in `$PI_HOME/software`. Add the following command to `/.bashrc` so that RSEM is accessible from startup:
 ```
 export PATH=$PATH:/home/groups/carilee/software/RSEM/
 ```
@@ -22,7 +22,7 @@ STAR is available from Sherlock's shared software. Use the following command to 
 ```
 ml biology star
 ```
-It is recommended that you also add this command to `/.profile` so STAR is available on startup.
+It is recommended that you also add this command to `/.bashrc` so STAR is available on startup.
 #### HTSeq-Count
 HTSeq-Count is a Python program and must be installed from pip. 
 ```
@@ -46,5 +46,9 @@ Then edit the file so that it looks similar to this:
 genomeDirectory=GENOME DIRECTORY HERE
 rsemDirectory=RSEM DIRECTORY HERE
 htseqGFFFFile=GFF FILE HERE
+
+[sherlock]
+outputDirectory=OUTPUT DIRECTORY HERE
+errorDirectory=ERROR DIRECTORY HERE
 ```
 
