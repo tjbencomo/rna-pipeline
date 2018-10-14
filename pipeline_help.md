@@ -42,13 +42,13 @@ touch config.ini
 ```
 Then edit the file so that it looks similar to this:
 ```
-[python]
+[rna-pipeline]
 genomeDirectory=GENOME DIRECTORY HERE
 rsemDirectory=RSEM DIRECTORY HERE
 htseqGFFFFile=GFF FILE HERE
 
 [sherlock]
-outputDirectory=OUTPUT DIRECTORY HERE
-errorDirectory=ERROR DIRECTORY HERE
+outputLogDirectory=OUTPUT DIRECTORY HERE
+errorLogDirectory=ERROR DIRECTORY HERE
 ```
 
