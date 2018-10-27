@@ -34,11 +34,11 @@ export PATH=$PATH:/home/users/$USER/.local/bin
 ```
 `$USER` is your sherlock username
 ### Reference Files
-`rna-pipeline` has two options to handle the reference files. The user can manually specify reference files at runtime through command line flags or they can use a `config.ini` file to set the necessary reference file paths once and allow the program to automatically find them.  
-To make `config.ini` first create the file inside the `/rna-pipeline` directory:
+`rna-pipeline` has two options to handle the reference files. The user can manually specify reference files at runtime through command line flags or they can create a config file with their preferences. To store preferences in a config file, first create the file `rna-pipeline-config.ini` in your `$HOME` directory
+
 ```
-cd rna-pipeline/
-touch config.ini
+cd $HOME
+touch rna-pipeline-config.ini
 ```
 Then edit the file so that it looks similar to this:
 ```
