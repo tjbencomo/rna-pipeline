@@ -1,6 +1,7 @@
 # rna-pipeline
 ## Project Status
-**CURRENTLY A WORK IN PROGRESS. SOME FUNCTIONALITY MAY NOT WORK PROPERLY YET. NOT READY FOR EXTERNAL USE**
+**This project is now deprecated. For a RNA-Seq pipeline that works on SLURM clusters like Stanford's Sherlock with minimal setup, see [here](https://github.com/tjbencomo/bulk-rnaseq)**
+
 I've recently discovered Cromwell, a workflow engine that easily scales tasks like RNASeq processing on HPC clusters. `variant-discovery-pipeline` uses Cromwell to abstract large amounts of pipeline code. `rna-pipeline` needs a major update to take advantage of Cromwell features.
 
 RNA-Seq analysis pipeline for the [Lee Lab](http://leelab.stanford.edu/) at Stanford University. The pipeline is designed to mimic dnanexus function on Stanford's Sherlock HPC cluster. The pipeline receives as input paired-end FASTQ files and performs alignment as well as several analysis functions.
